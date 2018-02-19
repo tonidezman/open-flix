@@ -1,8 +1,11 @@
 %article.video_category
   %header
     %h3= link_to "TV Commedies"
+  - if @videos.empty?
+    %h2 There are no Videos
+  - else
   .videos.row
     - @videos.each do |video|
       .video.col-sm-2
-        = link_to video do
-          %img(src="/tmp/#{video.cover_image_url}")
+        = link_to "", nil do
+          %img(src="#{video.small_cover_url}")
