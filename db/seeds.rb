@@ -18,6 +18,7 @@ action = Category.create(name: 'Action')
 Video.create(title: 'Futurama', description: Faker::Lorem.paragraph, small_cover_url: '/tmp/futurama.jpg', category: comedy)
 Video.create(title: 'South Park', description: Faker::Lorem.paragraph, small_cover_url: '/tmp/south_park.jpg', category: drama)
 Video.create(title: 'Family Guy', description: Faker::Lorem.paragraph, small_cover_url: '/tmp/family_guy.jpg', category: action)
+Video.create(title: 'Monk', description: Faker::Lorem.paragraph, small_cover_url: '/tmp/monk.jpg', category: action)
 
 puts "Created #{Video.count} videos"
 puts "Created #{Category.count} categories"
