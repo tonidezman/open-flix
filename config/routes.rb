@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'videos#index'
+  root 'landing#index'
 
   get 'categories/show'
   get 'home', to: 'videos#index'
