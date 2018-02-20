@@ -2,11 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Category, type: :model do
   it { should have_many(:videos) }
-
-  it "creates new Category" do
-    category = Category.create(name: 'Comedy')
-    expect(Category.count).to be(1)
-  end
+  it { should validate_presence_of :name }
 
   it "has ordered Categories by name" do
     comedy = Category.create(name: 'Comedy')
@@ -27,7 +23,4 @@ RSpec.describe Category, type: :model do
 
     expect(category.videos).to eq([a_team, b_team, z_team])
   end
-
-  it { should validate_presence_of :name }
-
 end
