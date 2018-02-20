@@ -23,4 +23,25 @@ RSpec.describe Category, type: :model do
 
     expect(category.videos).to eq([a_team, b_team, z_team])
   end
+
+  describe "#recent_videos" do
+    it "displays only 6 recent videos" do
+      category = Category.create(name: 'Comedy')
+      10.times do |i|
+        category.videos << Video.create(title: "Title#{i}", description: "some description")
+      end
+      expect(category.recent_videos.count).to eq(6)
+    end
+
+    it "videos are displayed from newest to oldest" do
+      category = Category.create(name: 'Comedy')
+      10.times do |i|
+        category.videos << Video.create(title: "Title#{i}", description: "some description", created_at: i.days.ago, updated_at: i.days.ago)
+      end
+      # these videos are ordered by newest first
+      videos = category.videos.order(updated_at: :desc)
+      expect(category.recent_videos[0..2]).to eq([videos.first, videos.second, videos.third])
+    end
+    it "shows just videos of one category and omits for other category"
+  end
 end
