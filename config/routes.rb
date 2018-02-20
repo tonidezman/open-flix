@@ -8,5 +8,24 @@ Rails.application.routes.draw do
   resources :videos, only: :show
   resources :categories, only: :show
 
-  get 'ui(/:action)', controller: 'ui'
+
+
+
+
+
+
+
+
+  # TODO remove this design files when you are done
+  # TODO remove controllers/ui folder
+  get 'ui', to: 'ui#index'
+  namespace :ui do
+    folder = "app/views/ui/"
+    files  = Dir.entries(folder)
+    filtered_files = files.map { |file| File.basename(file, '.html.haml') }.reject { |file| ['..', '.'].include? file }
+    filtered_files.each do |file|
+      get file
+    end
+  end
 end
+
