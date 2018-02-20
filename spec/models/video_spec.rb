@@ -27,19 +27,28 @@ RSpec.describe Video, type: :model do
 
     it "returns one result" do
       category = Category.create(name: 'Comedy')
-      video = Video.create(title: 'Movie', description: "some description", category: category)
-      video = Video.create(title: 'Movie2', description: "some description", category: category)
+      Video.create(title: 'Movie', description: "some description", category: category)
+      Video.create(title: 'Movie2', description: "some description", category: category)
       search_result = Video.search_by_title("movie2")
       expect(search_result.count).to be(1)
     end
 
     it "returns multiple results" do
       category = Category.create(name: 'Comedy')
-      video = Video.create(title: 'Movie', description: "some description", category: category)
-      video = Video.create(title: 'Movie2', description: "some description", category: category)
-      video = Video.create(title: 'barbie', description: "some description", category: category)
+      Video.create(title: 'Movie', description: "some description", category: category)
+      Video.create(title: 'Movie2', description: "some description", category: category)
+      Video.create(title: 'barbie', description: "some description", category: category)
       search_result = Video.search_by_title("movie")
       expect(search_result.count).to be(2)
+    end
+
+    it "return empty array if user's search term is empty string" do
+      category = Category.create(name: 'Comedy')
+      Video.create(title: 'Movie', description: "some description", category: category)
+      Video.create(title: 'Movie2', description: "some description", category: category)
+      Video.create(title: 'barbie', description: "some description", category: category)
+      search_result = Video.search_by_title("")
+      expect(search_result.empty?).to be(true)
     end
   end
 end

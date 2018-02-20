@@ -3,5 +3,8 @@ class Video < ApplicationRecord
 
   validates_presence_of :title, :description
 
-  scope :search_by_title, ->(title) { where(["title ILIKE ?", "%#{title}%"]) }
+  def self.search_by_title(title)
+    return [] if title.blank?
+    where(["title ILIKE ?", "%#{title}%"])
+  end
 end

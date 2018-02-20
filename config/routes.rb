@@ -5,7 +5,13 @@ Rails.application.routes.draw do
 
   get 'home', to: 'videos#index'
 
-  resources :videos, only: :show
+  resources :videos, only: :show do
+    collection do
+      post :search
+    end
+  end
+
+
   resources :categories, only: :show
 
 
