@@ -42,6 +42,17 @@ RSpec.describe Category, type: :model do
       videos = category.videos.order(updated_at: :desc)
       expect(category.recent_videos[0..2]).to eq([videos.first, videos.second, videos.third])
     end
-    it "shows just videos of one category and omits for other category"
+
+    it "shows just videos of one category and omits for other category" do
+      category = Category.create(name: 'Comedy')
+      category_2 = Category.create(name: 'Drama')
+      3.times do |i|
+        category.videos << Video.create(title: "Title#{i}", description: "some description", created_at: i.days.ago, updated_at: i.days.ago)
+      end
+      3.times do |i|
+        category_2.videos << Video.create(title: "Title#{i}", description: "some description", created_at: i.days.ago, updated_at: i.days.ago)
+      end
+      expect(category.recent_videos.count).to eq(3)
+    end
   end
 end
