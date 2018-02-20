@@ -1,6 +1,6 @@
 class VideosController < ApplicationController
   def index
-    @categories = Category.all.limit(5)
+    @categories = Category.all_asc.limit(5)
   end
 
   def show
