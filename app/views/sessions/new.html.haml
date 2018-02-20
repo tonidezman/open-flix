@@ -1,0 +1,11 @@
+%section.sign_in.container
+  .row
+    .col-sm-10.col-sm-offset-1
+      = bootstrap_form_tag url: login_path, method: :post do |f|
+        %header
+          %h1 Login
+        .row
+          = f.email_field :email, label: "Email Address",  wrapper: { class: 'col-sm-4' }
+        .row
+          = f.password_field :password, label: "Password",  wrapper: { class: 'col-sm-4' }
+        = f.submit "Log in"
