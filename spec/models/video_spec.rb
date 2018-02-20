@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Video, type: :model do
   it { should belong_to(:category) }
+  it { should validate_presence_of :title }
+  it { should validate_presence_of :description }
 
   it 'save itself' do
     category = Category.create(name: 'Comedy')
@@ -14,17 +16,5 @@ RSpec.describe Video, type: :model do
   it "video's and categories are deleted" do
     expect(Video.count).to be(0)
     expect(Category.count).to be(0)
-  end
-
-  it "does not create video without title" do
-    category = Category.create(name: 'Comedy')
-    Video.create(title: "", description: "this is my description", category: category)
-    expect(Video.count).to be(0)
-  end
-
-  it "does not create video without description" do
-    category = Category.create(name: 'Comedy')
-    Video.create(title: "A-team", description: "", category: category)
-    expect(Video.count).to be(0)
   end
 end

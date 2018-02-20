@@ -28,8 +28,6 @@ RSpec.describe Category, type: :model do
     expect(category.videos).to eq([a_team, b_team, z_team])
   end
 
-  it "does not create category without title" do
-    Category.create(name: "")
-    expect(Category.count).to be(0)
-  end
+  it { should validate_presence_of :name }
+
 end
