@@ -24,6 +24,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-nav'
   gem 'rspec-rails'
+  gem 'guard-rspec', require: false
 end
 
 group :development do
