@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
-
+  root 'videos#index'
 
   get 'categories/show'
-
   get 'home', to: 'videos#index'
 
   resources :videos, only: :show do
@@ -10,7 +9,6 @@ Rails.application.routes.draw do
       post :search
     end
   end
-
 
   resources :categories, only: :show
 
