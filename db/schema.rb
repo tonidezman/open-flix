@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180219173836) do
+ActiveRecord::Schema.define(version: 20180220050322) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,13 +21,6 @@ ActiveRecord::Schema.define(version: 20180219173836) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "categories_videos", id: false, force: :cascade do |t|
-    t.bigint "video_id"
-    t.bigint "category_id"
-    t.index ["category_id"], name: "index_categories_videos_on_category_id"
-    t.index ["video_id"], name: "index_categories_videos_on_video_id"
-  end
-
   create_table "videos", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -35,6 +28,8 @@ ActiveRecord::Schema.define(version: 20180219173836) do
     t.text "description"
     t.string "small_cover_url"
     t.string "large_cover_url"
+    t.integer "category_id"
+    t.index ["category_id"], name: "index_videos_on_category_id"
   end
 
 end

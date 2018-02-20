@@ -9,24 +9,15 @@
 require 'faker'
 
 puts "Deleting all Videos"
-Video.destroy_all
 Category.destroy_all
 
-Video.create(title: Faker::Name.name, description: Faker::Lorem.paragraph, small_cover_url: '/tmp/futurama.jpg')
-Video.create(title: Faker::Name.name, description: Faker::Lorem.paragraph, small_cover_url: '/tmp/south_park.jpg')
-Video.create(title: Faker::Name.name, description: Faker::Lorem.paragraph, small_cover_url: '/tmp/family_guy.jpg')
+comedy = Category.create(name: 'Comedy')
+drama  = Category.create(name: 'Drama')
+action = Category.create(name: 'Action')
 
-Category.create(name: 'Comedy')
-Category.create(name: 'Drama')
-Category.create(name: 'Action')
-
-comedy = Category.find_by(name: 'Comedy')
-Video.all.each do |video|
-  video.categories << comedy
-end
-
-drama = Category.find_by(name: 'Drama')
-Video.first.categories << drama
+Video.create(title: Faker::Name.name, description: Faker::Lorem.paragraph, small_cover_url: '/tmp/futurama.jpg', category: comedy)
+Video.create(title: Faker::Name.name, description: Faker::Lorem.paragraph, small_cover_url: '/tmp/south_park.jpg', category: drama)
+Video.create(title: Faker::Name.name, description: Faker::Lorem.paragraph, small_cover_url: '/tmp/family_guy.jpg', category: action)
 
 puts "Created #{Video.count} videos"
 puts "Created #{Category.count} categories"
