@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :check_logged_in_or_redirect
+  before_action :check_logged_in_or_redirect, except: [:new, :create]
 
   def new
     @user = User.new
