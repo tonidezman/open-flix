@@ -1,22 +1,23 @@
 %section#top-header.row
   %h1.col-md-2
-    = link_to "OpenFlix"
-  %ul.col-md-4.clearfix
-    %li= link_to "Videos"
-    %li= link_to "My Queue"
-    %li= link_to "People"
-  = form_with url: search_videos_path, local: true, class: "col-md-5 navbar-form" do |f|
-    .form-group
-      = f.text_field :search_term, placeholder: "Search for videos here", class: "form-control"
-      = f.submit 'Search', class: "btn btn-default"
-  #user_links.pull-right
-    %ul
-      %li.dropdown
-        %a(href="#" id="dlabel" role="button" data-toggle="dropdown" class="dropdown-toggle" data-target="#")
-          Welcome, Philip J. Fry
-          %b.caret
-        %ul.dropdown-menu(role="menu" aria-labelledby="dlabel")
-          %li
-            %a(href="#") Account
-            %a(href="#") Plan and Billing
-            %a(href="#") Sign Out
+    = link_to "OpenFlix", home_path
+  - if logged_in?
+    %ul.col-md-4.clearfix
+      %li= link_to "Videos"
+      %li= link_to "My Queue"
+      %li= link_to "People"
+    = form_with url: search_videos_path, local: true, class: "col-md-5 navbar-form" do |f|
+      .form-group
+        = f.text_field :search_term, placeholder: "Search for videos here", class: "form-control"
+        = f.submit 'Search', class: "btn btn-default"
+    #user_links.pull-right
+      %ul
+        %li.dropdown
+          %a(href="#" id="dlabel" role="button" data-toggle="dropdown" class="dropdown-toggle" data-target="#")
+            Welcome, Philip J. Fry
+            %b.caret
+          %ul.dropdown-menu(role="menu" aria-labelledby="dlabel")
+            %li
+              %a(href="#") Account
+              %a(href="#") Plan and Billing
+              %a(href="#") Sign Out
