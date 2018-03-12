@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'videos#index'
+  root 'landing#index'
 
   get  '/home',   to: 'videos#index'
   get  '/login',  to: 'sessions#new'

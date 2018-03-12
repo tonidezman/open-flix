@@ -1,4 +1,6 @@
 class VideosController < ApplicationController
+  before_action :check_logged_in_or_redirect
+
   def index
     @categories = Category.all_asc.limit(5)
   end

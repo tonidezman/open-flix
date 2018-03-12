@@ -14,7 +14,14 @@ module SessionsHelper
 
   def log_out
     session[:user_id] = nil
-    redirect_to login_path
+    @current_user = nil
+    redirect_to root_url
+  end
+
+  def check_logged_in_or_redirect
+    unless logged_in?
+      redirect_to root_url
+    end
   end
 
 end

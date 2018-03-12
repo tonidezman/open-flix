@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :check_logged_in_or_redirect
 
   def new
     @user = User.new
