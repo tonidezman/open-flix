@@ -20,7 +20,7 @@ module SessionsHelper
 
   def check_logged_in_or_redirect
     unless logged_in?
-      redirect_to root_url
+      redirect_to landing_page_path
     end
   end
 

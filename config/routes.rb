@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  root 'landing#index'
+  root 'videos#index'
 
+  get '/landing-page', to: 'landing#index', as: 'landing_page'
   get  '/home',   to: 'videos#index'
   get  '/login',  to: 'sessions#new'
   post '/login',  to: 'sessions#create'
