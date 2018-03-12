@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
   root 'landing#index'
 
-  get  '/login', to: 'sessions#new'
-  post '/login', to: 'sessions#create'
-  get '/logout', to: 'sessions#destroy'
-  get  '/home',  to: 'videos#index'
+  get  '/home',   to: 'videos#index'
+  get  '/login',  to: 'sessions#new'
+  post '/login',  to: 'sessions#create'
+  get '/logout',  to: 'sessions#destroy'
+  get '/register', to: 'users#new'
   get '/categories/show'
+
+  resources :users, only: :create
 
   resources :videos, only: :show do
     collection do
