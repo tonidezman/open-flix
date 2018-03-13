@@ -11,4 +11,5 @@ RSpec.describe Review, type: :model do
     create(:review)
     expect(Review.count).to eq(1)
   end
+
 end

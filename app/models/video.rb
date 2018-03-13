@@ -8,4 +8,12 @@ class Video < ApplicationRecord
     return [] if title.blank?
     where(["title ILIKE ?", "%#{title}%"])
   end
+
+  def last_5_reviews
+    reviews.order(updated_at: :desc).limit(5)
+  end
+
+  def average_review_score
+    reviews&.average(:rating)&.round(1)
+  end
 end
