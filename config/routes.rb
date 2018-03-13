@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get '/categories/show'
 
   resources :users, only: :create
+  resources :reviews, only: :create
 
   resources :videos, only: :show do
     collection do
