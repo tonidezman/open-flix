@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :check_logged_in_or_redirect, except: [:new, :create]
 
   def new
+    redirect_to home_path if logged_in?
     @user = User.new
   end
 
