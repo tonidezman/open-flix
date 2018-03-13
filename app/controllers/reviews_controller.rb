@@ -9,6 +9,9 @@ class ReviewsController < ApplicationController
       flash[:notice] = "Review successfully saved!"
       redirect_to @video
     else
+      @reviews = @video.last_5_reviews
+      @reviews_count = @video.reviews.count
+      @average_review_score = @video.average_review_score
       render 'videos/show'
     end
   end

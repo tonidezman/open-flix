@@ -6,7 +6,7 @@
       .video_info.col-sm-3
         %header
           %h3= @video.title
-          %span= "Rating: #{@average_review_score}/5.0"
+          %span Rating: #{@average_review_score}/5.0
         %p= @video.description
 
 %section.reviews.container
@@ -25,13 +25,13 @@
           %a(href="") Cancel
 
       %header
-        %h3= "User Reviews (#{@reviews_count})"
+        %h3 User Reviews (#{@reviews_count})
       %ul
         - @reviews.each do |review|
           %article.review
             %li.row
               .col-sm-2
-                %span= "Rating: #{review.rating} / 5"
+                %span Rating: #{review.rating} / 5
                 %p
                   by
                   %a{:href=>"", :data => {:author_id => 123}}
