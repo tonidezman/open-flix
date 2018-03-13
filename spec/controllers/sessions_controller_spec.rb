@@ -33,8 +33,10 @@ RSpec.describe SessionsController, type: :controller do
 
     it "redirects logout user" do
       create_user_and_login
+      expect(request.session[:user_id]).not_to be_nil
       get :destroy
       expect(response).to redirect_to(root_path)
+      expect(request.session[:user_id]).to be_nil
     end
 
   end

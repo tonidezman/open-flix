@@ -17,8 +17,18 @@ RSpec.describe UsersController, type: :controller do
 
   describe "POST #create" do
     it "redirects the user if data is valid" do
-      post :create, params: { user: {"email"=>"tonko@balonko.com", "password"=>"secret password", "full_name"=>"Tonko Balonko"}}
+      post :create, params: { user: attributes_for(:user) }
       expect(response).to redirect_to(home_path)
+    end
+
+    it "creates new user" do
+      post :create, params: { user: attributes_for(:user) }
+      expect(User.count).to eq(1)
+    end
+
+    it "does not create user" do
+      post :create, params: { user: {"email"=>"tonko@balonko.com", "password"=>"", "full_name"=>"Tonko Balonko"}}
+      expect(User.count).to eq(0)
     end
 
     it "renders new if user data is invalid" do
