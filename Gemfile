@@ -27,6 +27,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-nav'
   gem 'rspec-rails'
+  gem 'factory_bot_rails'
   gem 'guard-rspec', require: false
 end
 
@@ -37,6 +38,7 @@ group :development do
   gem "binding_of_caller"
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'guard-rspec', require: false
 end
 
 group :test do
