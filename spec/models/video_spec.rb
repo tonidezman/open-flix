@@ -20,36 +20,6 @@ RSpec.describe Video, type: :model do
     expect(Category.count).to be(0)
   end
 
-  describe "#current_user_rating" do
-    it "returns rating of current user" do
-      user = create(:user)
-      video = create(:video)
-      review = create(:review, user: user, video: video)
-      expected = review.rating
-      actual = video.current_user_rating(user)
-      expect(actual).to eq(expected)
-    end
-
-    it "does not return other user ratings" do
-      user_1 = create(:user, email: 'user1@example.com')
-      user_2 = create(:user, email: 'user2@example.com')
-      video = create(:video)
-      review_1 = create(:review, user: user_1, video: video)
-      review_2 = create(:review, user: user_2, video: video)
-      expected = review_1.rating
-      actual = video.current_user_rating(user_1.id)
-      expect(actual).to eq(expected)
-    end
-
-    it "returns 99 if there is no rating" do
-      user = create(:user)
-      video = create(:video)
-      expected = 0
-      actual = video.current_user_rating(user)
-      expect(actual).to eq(expected)
-    end
-  end
-
   describe "#search_by_title" do
 
     it "returns empty array" do

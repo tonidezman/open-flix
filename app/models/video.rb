@@ -17,9 +17,4 @@ class Video < ApplicationRecord
   def average_review_score
     reviews&.average(:rating)&.round(1)
   end
-
-  def current_user_rating(user_id)
-    default_rating = 0
-    reviews.find_by(user_id: user_id)&.rating || default_rating
-  end
 end
