@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   root 'videos#index'
 
   get '/landing-page', to: 'landing#index', as: 'landing_page'
@@ -8,6 +9,7 @@ Rails.application.routes.draw do
   get '/logout',  to: 'sessions#destroy'
   get '/register', to: 'users#new'
   get '/categories/show'
+  get 'queue_items/index', as: 'queue_items'
 
   resources :users, only: :create
   resources :reviews, only: :create

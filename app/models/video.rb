@@ -1,7 +1,7 @@
 class Video < ApplicationRecord
   belongs_to :category
   has_many :reviews
-  has_many :queue_items, dependent: :destroy
+  has_one :queue_item, dependent: :destroy
 
   validates_presence_of :title, :description
 
@@ -16,5 +16,10 @@ class Video < ApplicationRecord
 
   def average_review_score
     reviews&.average(:rating)&.round(1)
+  end
+
+  def current_user_rating(user_id)
+    default_rating = 0
+    reviews.find_by(user_id: user_id)&.rating || default_rating
   end
 end
