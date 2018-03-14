@@ -9,7 +9,9 @@ Rails.application.routes.draw do
   get '/logout',  to: 'sessions#destroy'
   get '/register', to: 'users#new'
   get '/categories/show'
-  get 'queue_items/index', as: 'queue_items'
+
+  # get 'queue_items/index', as: 'queue_items'
+  resources :queue_items, only: [:index, :create, :destroy]
 
   resources :users, only: :create
   resources :reviews, only: :create

@@ -9,7 +9,7 @@ module SpecTestHelper
     request.session[:user_id] = user.id
   end
 
-  def logged_user()
+  def logged_in_user()
     User.find(request.session[:user_id])
   end
 
