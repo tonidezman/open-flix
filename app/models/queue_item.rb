@@ -14,4 +14,8 @@ class QueueItem < ApplicationRecord
   def category_name
     video.category.name
   end
+
+  def category
+    video.category
+  end
 end

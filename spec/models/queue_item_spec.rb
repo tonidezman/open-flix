@@ -31,12 +31,22 @@ RSpec.describe QueueItem, type: :model do
   end
 
   describe "#category_name" do
-    it "returns category" do
+    it "returns category name" do
       user = create(:user)
       category = create(:category, name: "comedy")
       video = create(:video, category: category)
       queue_item = create(:queue_item, user: user, video: video)
       expect(queue_item.category_name).to eq("comedy")
+    end
+  end
+
+  describe "#category" do
+    it "returns category" do
+      user = create(:user)
+      category = create(:category, name: "comedy")
+      video = create(:video, category: category)
+      queue_item = create(:queue_item, user: user, video: video)
+      expect(queue_item.category).to eq(category)
     end
   end
 end
