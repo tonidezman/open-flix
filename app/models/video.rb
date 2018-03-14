@@ -1,6 +1,7 @@
 class Video < ApplicationRecord
   belongs_to :category
   has_many :reviews
+  has_many :queue_items, dependent: :destroy
 
   validates_presence_of :title, :description
 
