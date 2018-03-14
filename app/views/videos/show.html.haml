@@ -16,13 +16,13 @@
         = f.hidden_field :video_id, value: @video.id
         .row
           .col-sm-3
-            = f.select :rating, 5.downto(1).map { |num| ["#{num} stars", num]}, label: "Rate this video"
+            = f.select :rating, 5.downto(1).map { |num| [pluralize(num, "star"), num]}, label: "Rate this video"
         .row
           .col-sm-8
             = f.text_area :body, label: "Write Review", rows: 6
         %fieldset.form-group.actions.clearfix
           = f.submit "Submit"
-          %a(href="") Cancel
+          = link_to "Cancel", @video
 
       %header
         %h3 User Reviews (#{@reviews_count})
