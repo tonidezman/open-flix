@@ -15,5 +15,17 @@ RSpec.describe User, type: :model do
       create(:queue_item, user: user, list_order: 1)
       expect(user.next_queue_item_order_num).to eq(2)
     end
+
+    it "returns next order number, counting from the last item in queue item" do
+      user = create(:user)
+      create(:queue_item, user: user, list_order: 7)
+      expect(user.next_queue_item_order_num).to eq(8)
+    end
+
+    it "returns 99 if last item has no order number" do
+      user = create(:user)
+      create(:queue_item, user: user, list_order: nil)
+      expect(user.next_queue_item_order_num).to eq(99)
+    end
   end
 end

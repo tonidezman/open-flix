@@ -13,7 +13,13 @@ class User < ApplicationRecord
     if queue_items.empty?
       starting_number
     else
-      queue_items.count + 1
+      next_num = queue_items.order(list_order: :desc)&.first&.list_order
+      default_value = 99
+      if next_num
+        next_num + 1
+      else
+        default_value
+      end
     end
   end
 end

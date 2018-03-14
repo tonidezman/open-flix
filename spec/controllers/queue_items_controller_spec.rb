@@ -42,6 +42,14 @@ RSpec.describe QueueItemsController, type: :controller do
         post :create, params: { video_id: video.id, user: other_user, user_id: other_user.id }
         expect(other_user.queue_items.count).to eq(0)
       end
+
+      it "does not create queue item for the same video" do
+        video = create(:video)
+        post :create, params: { video_id: video.id }
+        post :create, params: { video_id: video.id }
+        expect(logged_in_user.queue_items.count).to eq(1)
+      end
+
     end
 
     context "user is not logged in" do

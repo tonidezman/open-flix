@@ -1,6 +1,7 @@
 class QueueItem < ApplicationRecord
   belongs_to :user
   belongs_to :video
+  validates :user_id, uniqueness: { scope: :video_id }
 
   def video_title
     video.title
