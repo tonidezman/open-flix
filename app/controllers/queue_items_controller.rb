@@ -7,6 +7,7 @@ class QueueItemsController < ApplicationController
 
   def create
     queue_item = QueueItem.new(user: current_user, video_id: params[:video_id])
+    queue_item.list_order = current_user.next_queue_item_order_num
 
     if queue_item.save
       flash[:notice] = "New Video added to the Queue"
