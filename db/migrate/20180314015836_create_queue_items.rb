@@ -1,7 +1,7 @@
 class CreateQueueItems < ActiveRecord::Migration[5.1]
   def change
     create_table :queue_items do |t|
-      t.integer :list_order
+      t.integer :position
       t.integer :user_id, index: true
       t.integer :video_id
 
