@@ -17,8 +17,9 @@
             %tbody
               - @queue_items.each do |item|
                 %tr
+                  = hidden_field_tag "queue_items[][id]", item.id
                   %td
-                    = text_field_tag "positions[#{item.id}]", item.position, class: "form-control"
+                    = text_field_tag "queue_items[][position]", item.position, class: "form-control"
                   %td
                     = link_to item.video_title, item.video
                   %td
@@ -31,4 +32,3 @@
                     = link_to queue_item_path(id: item.id), method: :delete do
                       %i.glyphicon.glyphicon-remove
           = submit_tag "Update Instant Queue", class: "btn btn-default"
-

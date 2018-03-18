@@ -44,7 +44,9 @@ class QueueItemsController < ApplicationController
 
   def update_queue_items
     ActiveRecord::Base.transaction do
-      params[:positions].each do |queue_item_id, new_position|
+      params[:queue_items].each do |queue_item_data|
+        queue_item_id = queue_item_data[:id]
+        new_position = queue_item_data[:position]
         queue_item = QueueItem.find(queue_item_id)
         queue_item.is_valid_number(new_position)
         queue_item.update_attributes!(position: new_position)

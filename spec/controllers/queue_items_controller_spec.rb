@@ -28,7 +28,10 @@ RSpec.describe QueueItemsController, type: :controller do
         queue_item_1 = create(:queue_item, position: 1, user: logged_in_user)
         queue_item_2 = create(:queue_item, position: 2, user: logged_in_user)
 
-        post :update_items, params: { positions: { "#{queue_item_1.id}": '2', "#{queue_item_2.id}": '1' } }
+        post :update_items, params: { queue_items: [
+          {"id"=> queue_item_1.id, "position"=> "7"},
+          {"id"=> queue_item_2.id, "position"=> "3"}
+        ] }
         expect(QueueItem.find(queue_item_1.id).position).to eq(2)
         expect(QueueItem.find(queue_item_2.id).position).to eq(1)
       end
@@ -37,25 +40,38 @@ RSpec.describe QueueItemsController, type: :controller do
         queue_item_1 = create(:queue_item, position: 1, user: logged_in_user)
         queue_item_2 = create(:queue_item, position: 2, user: logged_in_user)
 
-        post :update_items, params: { positions: { "#{queue_item_1.id}": '2tonko', "#{queue_item_2.id}": '1' } }
+        post :update_items, params: { queue_items: [
+          {"id"=> queue_item_1.id, "position"=> "2tonko"},
+          {"id"=> queue_item_2.id, "position"=> "1"}
+        ] }
         expect(QueueItem.find(queue_item_1.id).position).to eq(1)
         expect(QueueItem.find(queue_item_2.id).position).to eq(2)
       end
 
-      it 'other user cannot change position for other user' do
+      it 'current user cannot change position for other user' do
         other_user = create(:user)
-        queue_item = create(:queue_item, user: other_user)
-        post :update_items, params: { positions: { "#{queue_item.id}": '7'} }
-        expect(queue_item.position).not_to eq(7)
+        queue_item_1 = create(:queue_item, position: 1, user: other_user)
+        queue_item_2 = create(:queue_item, position: 2, user: other_user)
+        post :update_items, params: { queue_items: [
+          {"id"=> queue_item_1.id, "position"=> "2"},
+          {"id"=> queue_item_2.id, "position"=> "1"}
+        ] }
+        expect(queue_item_1.position).to eq(1)
+        expect(queue_item_2.position).to eq(2)
       end
 
       it 'shows positions ascending order' do
         queue_item_1 = create(:queue_item, position: 1, user: logged_in_user)
         queue_item_2 = create(:queue_item, position: 2, user: logged_in_user)
+        queue_item_3 = create(:queue_item, position: 3, user: logged_in_user)
+        expect(logged_in_user.queue_items).to eq([queue_item_1, queue_item_2, queue_item_3])
 
-        expect(logged_in_user.queue_items).to eq([queue_item_1, queue_item_2])
-        post :update_items, params: { positions: { "#{queue_item_1.id}": '2', "#{queue_item_2.id}": '1' } }
-        expect(logged_in_user.queue_items).to eq([queue_item_2, queue_item_1])
+        post :update_items, params: { queue_items: [
+          {"id"=> queue_item_1.id, "position"=> "5"},
+          {"id"=> queue_item_2.id, "position"=> "3"},
+          {"id"=> queue_item_3.id, "position"=> "9"},
+        ] }
+        expect(logged_in_user.queue_items).to eq([queue_item_2, queue_item_1, queue_item_3])
       end
     end
 
@@ -101,7 +117,6 @@ RSpec.describe QueueItemsController, type: :controller do
         post :create, params: { video_id: video.id }
         expect(logged_in_user.queue_items.count).to eq(1)
       end
-
     end
 
     context "user is not logged in" do
