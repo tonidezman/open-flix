@@ -1,7 +1,9 @@
 class QueueItem < ApplicationRecord
   belongs_to :user
   belongs_to :video
+
   validates :user_id, uniqueness: { scope: :video_id }
+  validates :position, format: { with: /\A\d+\z/, message: "Integer only" }
 
   def video_title
     video.title
@@ -18,5 +20,11 @@ class QueueItem < ApplicationRecord
 
   def category
     video.category
+  end
+
+  def is_valid_number(str)
+    if !/\A\d+\z/.match(str)
+      raise ArgumentError.new("Only integers allowed.")
+    end
   end
 end

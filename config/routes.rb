@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   # get 'queue_items/index', as: 'queue_items'
   resources :queue_items, only: [:index, :create, :destroy]
+  post '/update_queue_items_update', to: 'queue_items#update_items'
 
   resources :users, only: :create
   resources :reviews, only: :create

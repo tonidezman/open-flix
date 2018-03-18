@@ -26,4 +26,23 @@ class QueueItemsController < ApplicationController
     end
     redirect_to queue_items_path
   end
+
+  def update_items
+    queue_items = current_user.queue_items
+    begin
+      ActiveRecord::Base.transaction do
+        params[:positions].each do |queue_item_id, new_position|
+          queue_item = QueueItem.find(queue_item_id)
+          queue_item.is_valid_number(new_position)
+          queue_item.update_attributes!(position: new_position)
+        end
+      end
+    rescue ArgumentError
+      redirect_to queue_items_path, alert: "Only positive integers allowed!"
+      return
+    end
+
+    redirect_to queue_items_path, notice: "Positions saved!"
+  end
+
 end
