@@ -73,6 +73,26 @@ RSpec.describe QueueItemsController, type: :controller do
         ] }
         expect(logged_in_user.queue_items).to eq([queue_item_2, queue_item_1, queue_item_3])
       end
+
+      it 'creates new rating' do
+        queue_item = create(:queue_item, user: logged_in_user)
+        expect(queue_item.rating).not_to eq(3)
+        post :update_items, params: { queue_items: [
+          { id: queue_item.id, rating: "3" }
+        ]}
+        expect(queue_item.reload.rating).to eq(3)
+      end
+
+      it 'updates rating' do
+        video = create(:video)
+        review = create(:review, user: logged_in_user, video: video, rating: 1)
+        queue_item = create(:queue_item, user: logged_in_user, video: video)
+        expect(queue_item.rating).to eq(1)
+        post :update_items, params: { queue_items: [
+          { id: queue_item.id, rating: "3" }
+        ]}
+        expect(queue_item.reload.rating).to eq(3)
+      end
     end
 
     context "user is not logged in" do

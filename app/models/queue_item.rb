@@ -12,6 +12,18 @@ class QueueItem < ApplicationRecord
     end
   end
 
+  def save_rating(new_rating)
+    if rating != new_rating
+      review = Review.where(user: user, video: video).first
+      review.rating = new_rating
+      review.save!
+    end
+  end
+
+  def create_new_rating(user_id, rating)
+    Review.create(video_id: video.id, user_id: user_id, rating: rating)
+  end
+
   def video_title
     video.title
   end

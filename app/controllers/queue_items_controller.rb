@@ -37,18 +37,25 @@ class QueueItemsController < ApplicationController
 
     queue_items = current_user.queue_items
     QueueItem.normalize_positions(queue_items)
-    redirect_to queue_items_path, notice: "Positions saved!"
+    redirect_to queue_items_path, notice: "Saved!"
   end
 
   private
 
   def update_queue_items
+    lowest_rating = 1
     ActiveRecord::Base.transaction do
       params[:queue_items].each do |queue_item_data|
         queue_item_id = queue_item_data[:id]
-        new_position = queue_item_data[:position]
         queue_item = QueueItem.find(queue_item_id)
+        new_rating = queue_item_data[:rating].to_i
+        new_position = queue_item_data[:position].blank? ? queue_item.position.to_s : queue_item_data[:position]
         queue_item.is_valid_number(new_position)
+        if queue_item.rating < lowest_rating
+          queue_item.create_new_rating(current_user.id, new_rating)
+        else
+          queue_item.save_rating(new_rating)
+        end
         queue_item.update_attributes!(position: new_position)
       end
     end
