@@ -18,13 +18,13 @@
               - @queue_items.each do |item|
                 %tr
                   %td
-                    = text_field_tag "positions[#{item.id}]", item.position
+                    = text_field_tag "positions[#{item.id}]", item.position, class: "form-control"
                   %td
                     = link_to item.video_title, item.video
                   %td
                     = button_to "Play", nil, class: "btn btn-default"
                   %td
-                    = item.rating
+                    = select_tag :rating, options_for_select(array_of_star_ratings, item.rating), prompt: "", class: 'form-control'
                   %td
                     = link_to item.category_name, item.category
                   %td

@@ -20,7 +20,7 @@
         = f.hidden_field :video_id, value: @video.id
         .row
           .col-sm-3
-            = f.select :rating, 5.downto(1).map { |num| [pluralize(num, "star"), num]}, label: "Rate this video"
+            = f.select :rating, array_of_star_ratings,label: "Rate this video"
         .row
           .col-sm-8
             = f.text_area :body, label: "Write Review", rows: 6
