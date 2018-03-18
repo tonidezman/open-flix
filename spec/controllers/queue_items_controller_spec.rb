@@ -25,8 +25,8 @@ RSpec.describe QueueItemsController, type: :controller do
       end
 
       it "changes positions if user sends valid data" do
-        queue_item_1 = create(:queue_item, position: 1)
-        queue_item_2 = create(:queue_item, position: 2)
+        queue_item_1 = create(:queue_item, position: 1, user: logged_in_user)
+        queue_item_2 = create(:queue_item, position: 2, user: logged_in_user)
 
         post :update_items, params: { positions: { "#{queue_item_1.id}": '2', "#{queue_item_2.id}": '1' } }
         expect(QueueItem.find(queue_item_1.id).position).to eq(2)
@@ -34,8 +34,8 @@ RSpec.describe QueueItemsController, type: :controller do
       end
 
       it 'does not change position if the user sends invalid data' do
-        queue_item_1 = create(:queue_item, position: 1)
-        queue_item_2 = create(:queue_item, position: 2)
+        queue_item_1 = create(:queue_item, position: 1, user: logged_in_user)
+        queue_item_2 = create(:queue_item, position: 2, user: logged_in_user)
 
         post :update_items, params: { positions: { "#{queue_item_1.id}": '2tonko', "#{queue_item_2.id}": '1' } }
         expect(QueueItem.find(queue_item_1.id).position).to eq(1)
@@ -47,6 +47,15 @@ RSpec.describe QueueItemsController, type: :controller do
         queue_item = create(:queue_item, user: other_user)
         post :update_items, params: { positions: { "#{queue_item.id}": '7'} }
         expect(queue_item.position).not_to eq(7)
+      end
+
+      it 'shows positions ascending order' do
+        queue_item_1 = create(:queue_item, position: 1, user: logged_in_user)
+        queue_item_2 = create(:queue_item, position: 2, user: logged_in_user)
+
+        expect(logged_in_user.queue_items).to eq([queue_item_1, queue_item_2])
+        post :update_items, params: { positions: { "#{queue_item_1.id}": '2', "#{queue_item_2.id}": '1' } }
+        expect(logged_in_user.queue_items).to eq([queue_item_2, queue_item_1])
       end
     end
 
