@@ -13,6 +13,19 @@ RSpec.describe QueueItem, type: :model do
     end
   end
 
+  describe "#normalize_positions" do
+    it "correctly reorders queue items" do
+      user = create(:user)
+      queue_item_1 = create(:queue_item, user: user, position: 2)
+      queue_item_2 = create(:queue_item, user: user, position: 5)
+      queue_item_3 = create(:queue_item, user: user, position: 9)
+      QueueItem.normalize_positions([queue_item_1, queue_item_2, queue_item_3])
+      expect(queue_item_1.reload.position).to eq(1)
+      expect(queue_item_2.reload.position).to eq(2)
+      expect(queue_item_3.reload.position).to eq(3)
+    end
+  end
+
   describe "#is_valid_number" do
     it "raises ArgumentError if it is invalid number" do
       queue_item = create(:queue_item)

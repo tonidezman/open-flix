@@ -5,6 +5,13 @@ class QueueItem < ApplicationRecord
   validates :user_id, uniqueness: { scope: :video_id }
   validates :position, format: { with: /\A\d+\z/, message: "Integer only" }
 
+  def self.normalize_positions(queue_items)
+    queue_items.each_with_index do |queue_item, index|
+      queue_item.position = index + 1
+      queue_item.save!
+    end
+  end
+
   def video_title
     video.title
   end

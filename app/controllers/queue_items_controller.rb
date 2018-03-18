@@ -35,6 +35,8 @@ class QueueItemsController < ApplicationController
       return
     end
 
+    queue_items = current_user.queue_items
+    QueueItem.normalize_positions(queue_items)
     redirect_to queue_items_path, notice: "Positions saved!"
   end
 
