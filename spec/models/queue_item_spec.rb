@@ -13,6 +13,18 @@ RSpec.describe QueueItem, type: :model do
     end
   end
 
+  describe "#is_valid_number" do
+    it "raises ArgumentError if it is invalid number" do
+      queue_item = create(:queue_item)
+      expect{queue_item.is_valid_number("3tonko")}.to raise_error(ArgumentError)
+    end
+
+    it "does not raise Argument error if number is positive integer" do
+      queue_item = create(:queue_item)
+      expect{queue_item.is_valid_number("3")}.not_to raise_error
+    end
+  end
+
   describe "#rating" do
     it "returns review rating" do
       user = create(:user)
