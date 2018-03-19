@@ -10,6 +10,10 @@ class Video < ApplicationRecord
     where(["title ILIKE ?", "%#{title}%"])
   end
 
+  def not_yet_queued?(user)
+    !QueueItem.find_by(user_id: user.id, video_id: id)
+  end
+
   def last_5_reviews
     reviews.order(updated_at: :desc).limit(5)
   end

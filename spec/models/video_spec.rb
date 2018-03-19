@@ -20,6 +20,29 @@ RSpec.describe Video, type: :model do
     expect(Category.count).to be(0)
   end
 
+  describe "#not_yet_queued?" do
+    it "returns false if video is not yet queued" do
+      user = create(:user)
+      video = create(:video)
+      expect(video.not_yet_queued?(user)).to eq(true)
+    end
+
+    it "return true if video is queued" do
+      user = create(:user)
+      video = create(:video)
+      create(:queue_item, user: user, video: video)
+      expect(video.not_yet_queued?(user)).to eq(false)
+    end
+
+    it "other users do not get interfered when user queues an item" do
+      other_user = create(:user)
+      user = create(:user)
+      video = create(:video)
+      create(:queue_item, user: user, video: video)
+      expect(video.not_yet_queued?(other_user)).to eq(true)
+    end
+  end
+
   describe "#search_by_title" do
 
     it "returns empty array" do
