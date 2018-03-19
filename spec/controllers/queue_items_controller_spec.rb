@@ -25,8 +25,8 @@ RSpec.describe QueueItemsController, type: :controller do
       end
 
       it "changes positions if user sends valid data" do
-        queue_item_1 = create(:queue_item, position: 1, user: logged_in_user)
-        queue_item_2 = create(:queue_item, position: 2, user: logged_in_user)
+        queue_item_1 = create(:queue_item, position: 1, user: current_user)
+        queue_item_2 = create(:queue_item, position: 2, user: current_user)
 
         post :update_items, params: { queue_items: [
           {"id"=> queue_item_1.id, "position"=> "7"},
@@ -37,8 +37,8 @@ RSpec.describe QueueItemsController, type: :controller do
       end
 
       it 'does not change position if the user sends invalid data' do
-        queue_item_1 = create(:queue_item, position: 1, user: logged_in_user)
-        queue_item_2 = create(:queue_item, position: 2, user: logged_in_user)
+        queue_item_1 = create(:queue_item, position: 1, user: current_user)
+        queue_item_2 = create(:queue_item, position: 2, user: current_user)
 
         post :update_items, params: { queue_items: [
           {"id"=> queue_item_1.id, "position"=> "2tonko"},
@@ -61,21 +61,21 @@ RSpec.describe QueueItemsController, type: :controller do
       end
 
       it 'shows positions ascending order' do
-        queue_item_1 = create(:queue_item, position: 1, user: logged_in_user)
-        queue_item_2 = create(:queue_item, position: 2, user: logged_in_user)
-        queue_item_3 = create(:queue_item, position: 3, user: logged_in_user)
-        expect(logged_in_user.queue_items).to eq([queue_item_1, queue_item_2, queue_item_3])
+        queue_item_1 = create(:queue_item, position: 1, user: current_user)
+        queue_item_2 = create(:queue_item, position: 2, user: current_user)
+        queue_item_3 = create(:queue_item, position: 3, user: current_user)
+        expect(current_user.queue_items).to eq([queue_item_1, queue_item_2, queue_item_3])
 
         post :update_items, params: { queue_items: [
           {"id"=> queue_item_1.id, "position"=> "5"},
           {"id"=> queue_item_2.id, "position"=> "3"},
           {"id"=> queue_item_3.id, "position"=> "9"},
         ] }
-        expect(logged_in_user.queue_items).to eq([queue_item_2, queue_item_1, queue_item_3])
+        expect(current_user.queue_items).to eq([queue_item_2, queue_item_1, queue_item_3])
       end
 
       it 'creates new rating' do
-        queue_item = create(:queue_item, user: logged_in_user)
+        queue_item = create(:queue_item, user: current_user)
         expect(queue_item.rating).not_to eq(3)
         post :update_items, params: { queue_items: [
           { id: queue_item.id, rating: "3" }
@@ -85,8 +85,8 @@ RSpec.describe QueueItemsController, type: :controller do
 
       it 'updates rating' do
         video = create(:video)
-        review = create(:review, user: logged_in_user, video: video, rating: 1)
-        queue_item = create(:queue_item, user: logged_in_user, video: video)
+        review = create(:review, user: current_user, video: video, rating: 1)
+        queue_item = create(:queue_item, user: current_user, video: video)
         expect(queue_item.rating).to eq(1)
         post :update_items, params: { queue_items: [
           { id: queue_item.id, rating: "3" }
@@ -115,13 +115,13 @@ RSpec.describe QueueItemsController, type: :controller do
       it "saves queue item" do
         video = create(:video)
         post :create, params: { video_id: video.id }
-        expect(logged_in_user.queue_items.count).to eq(1)
+        expect(current_user.queue_items.count).to eq(1)
       end
 
       it "doesn't save queue item" do
         video = create(:video)
         post :create, params: {}
-        expect(logged_in_user.queue_items.count).to eq(0)
+        expect(current_user.queue_items.count).to eq(0)
       end
 
       it "other user cannot add queue_items to other users" do
@@ -135,7 +135,7 @@ RSpec.describe QueueItemsController, type: :controller do
         video = create(:video)
         post :create, params: { video_id: video.id }
         post :create, params: { video_id: video.id }
-        expect(logged_in_user.queue_items.count).to eq(1)
+        expect(current_user.queue_items.count).to eq(1)
       end
     end
 
@@ -160,10 +160,10 @@ RSpec.describe QueueItemsController, type: :controller do
       end
 
       it "deletes queue item" do
-        queue_item = create(:queue_item, user: logged_in_user)
+        queue_item = create(:queue_item, user: current_user)
 
         delete :destroy, { params: {id: queue_item.id}}
-        expect(logged_in_user.queue_items.count).to eq(0)
+        expect(current_user.queue_items.count).to eq(0)
       end
 
       it "does not delete other person queue item" do
