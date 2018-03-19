@@ -1,26 +1,58 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
 require 'faker'
+require 'factory_bot_rails'
 
-puts "Deleting all Videos"
+puts "Deleting data"
 Category.destroy_all
+QueueItem.destroy_all
+User.destroy_all
+Review.destroy_all
+Video.destroy_all
 
-comedy = Category.create(name: 'Comedy')
-drama  = Category.create(name: 'Drama')
-action = Category.create(name: 'Action')
+puts
+puts "Generating data"
+puts
 
-10.times do
-  Video.create(title: 'Futurama', description: Faker::Lorem.paragraph, small_cover_url: '/tmp/futurama.jpg', category: comedy)
-  Video.create(title: 'South Park', description: Faker::Lorem.paragraph, small_cover_url: '/tmp/south_park.jpg', category: drama)
-  Video.create(title: 'Family Guy', description: Faker::Lorem.paragraph, small_cover_url: '/tmp/family_guy.jpg', category: action)
-  Video.create(title: 'Monk', description: Faker::Lorem.paragraph, small_cover_url: '/tmp/monk.jpg', category: action)
+puts "Generating Category"
+comedy = FactoryBot.create(:category, name: 'Comedy')
+drama = FactoryBot.create(:category, name: 'Drama')
+action = FactoryBot.create(:category, name: 'Action')
+
+puts
+puts "Generating Videos"
+10.times do |index|
+  FactoryBot.create(:video, title: "Futurama #{index}", small_cover_url: '/tmp/futurama.jpg', category: comedy)
+  FactoryBot.create(:video, title: "South Park #{index}", small_cover_url: '/tmp/south_park.jpg', category: drama)
+  FactoryBot.create(:video, title: "Family Guy #{index}", small_cover_url: '/tmp/family_guy.jpg', category: action)
+  FactoryBot.create(:video, title: "Monk #{index}", small_cover_url: '/tmp/monk.jpg', category: action)
 end
 
-puts "Created #{Video.count} videos"
+puts
+puts "Creating Users"
+7.times do
+  FactoryBot.create(:user, full_name: Faker::Name.name)
+end
+
+puts
+puts "Users are rating videos now :)"
+User.all.each do |user|
+  Video.all.each do |video|
+    FactoryBot.create(:review, user: user, video: video, rating: [*1..5].sample)
+  end
+end
+
+puts
+puts "Users are adding videos to their queue"
+User.first(5).each do |user|
+  Video.all.each do |video|
+    FactoryBot.create(:queue_item, user: user, video: video)
+  end
+end
+
+puts
+puts "*************************"
 puts "Created #{Category.count} categories"
+puts "Created #{User.count} users"
+puts "Created #{Video.count} videos"
+puts "Created #{Review.count} reviews"
+puts "Created #{QueueItem.count} queueItems"
+puts "*************************"
