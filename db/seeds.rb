@@ -33,12 +33,21 @@ puts "Creating Users"
 end
 
 puts
+puts "Following other users"
+User.all.each do |user|
+  if [true, false].sample
+    user.friends << User.all[[*0..6].sample]
+  end
+end
+
+puts
 puts "Users are rating videos now :)"
 User.all.each do |user|
   Video.all.each do |video|
     FactoryBot.create(:review, user: user, video: video, rating: [*1..5].sample)
   end
 end
+
 
 puts
 puts "Users are adding videos to their queue"
@@ -52,6 +61,7 @@ puts
 puts "*************************"
 puts "Created #{Category.count} categories"
 puts "Created #{User.count} users"
+puts "Created #{Friendship.count} friendships"
 puts "Created #{Video.count} videos"
 puts "Created #{Review.count} reviews"
 puts "Created #{QueueItem.count} queueItems"
