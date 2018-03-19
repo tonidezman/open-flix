@@ -5,7 +5,7 @@
     %ul.col-md-4.clearfix
       %li= link_to "Videos", home_path
       %li= link_to "My Queue", queue_items_path
-      %li= link_to "People"
+      %li= link_to "People", friendships_path
     = form_with url: search_videos_path, local: true, class: "col-md-5 navbar-form" do |f|
       .form-group
         = f.text_field :search_term, placeholder: "Search for videos here", class: "form-control"

@@ -4,6 +4,9 @@ class User < ApplicationRecord
   has_many :reviews
   has_many :queue_items, -> { order :position }, dependent: :destroy
 
+  has_many :friendships
+  has_many :friends, through: :friendships
+
   validates :email, presence: true, uniqueness: true
   validates :full_name, presence: true
   validates :password, presence: true
@@ -21,5 +24,9 @@ class User < ApplicationRecord
         default_value
       end
     end
+  end
+
+  def followers
+    Friendship.where(friend_id: id)
   end
 end

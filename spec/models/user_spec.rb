@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   it { should have_many(:reviews) }
   it { should have_many(:queue_items).order(:position) }
+  it { should have_many(:friendships) }
+  it { should have_many(:friends) }
 
   describe "#next_queue_item_order_num" do
     it "returns 1 if there are no queue items" do
