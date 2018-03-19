@@ -29,6 +29,8 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_bot_rails'
   gem 'guard-rspec', require: false
+  gem 'capybara', '~> 2.13'
+  gem 'selenium-webdriver'
 end
 
 group :development do
@@ -45,5 +47,4 @@ group :test do
   gem 'database_cleaner'
   gem 'shoulda-matchers'
   gem 'vcr'
-  gem 'selenium-webdriver'
 end

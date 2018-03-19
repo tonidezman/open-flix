@@ -9,6 +9,8 @@ require 'rspec/rails'
 
 
 require 'support/factory_bot'
+require 'capybara/rails'
+Capybara.server = :puma
 
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -78,5 +80,15 @@ RSpec.configure do |config|
       end
     end
 
+  end
+
+  RSpec.configure do |config|
+    config.before(:each, type: :system) do
+      driven_by :rack_test
+    end
+
+    config.before(:each, type: :system, js: true) do
+      driven_by :selenium, using: :firefox
+    end
   end
 end
