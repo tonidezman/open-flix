@@ -29,4 +29,10 @@ class User < ApplicationRecord
   def followers
     Friendship.where(friend_id: id)
   end
+
+  def can_follow?(other_user)
+    return false if id == other_user.id
+    Friendship.where(user_id: id, friend_id: other_user.id).empty?
+  end
+
 end

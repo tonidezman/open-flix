@@ -25,4 +25,22 @@ RSpec.describe User, type: :model do
     end
 
   end
+
+  describe "#can_follow?" do
+    let(:user) { create(:user) }
+    let(:other_user) { create(:user) }
+
+    it "returns false because user cannot follow himself" do
+      expect(user.can_follow?(user)).to eq(false)
+    end
+
+    it "returns true if user does not follow the user" do
+      expect(user.can_follow?(other_user)).to eq(true)
+    end
+
+    it "returns false if user already follows the user" do
+      create(:friendship, user_id: user.id, friend_id: other_user.id)
+      expect(user.can_follow?(other_user)).to eq(false)
+    end
+  end
 end
