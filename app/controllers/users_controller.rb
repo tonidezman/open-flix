@@ -17,6 +17,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def show
+    @user = User.find_by(id: params[:id])
+    @queue_items = @user.queue_items || []
+  end
+
   private
 
   def user_params

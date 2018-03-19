@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   resources :queue_items, only: [:index, :create, :destroy]
   post '/update_queue_items_update', to: 'queue_items#update_items'
 
-  resources :users, only: :create
+  resources :users, only: [:show, :create]
   resources :reviews, only: :create
 
   resources :videos, only: :show do
