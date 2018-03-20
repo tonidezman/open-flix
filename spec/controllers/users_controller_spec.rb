@@ -16,6 +16,10 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe "POST #create" do
+    after(:each) do
+      ActionMailer::Base.deliveries.clear
+    end
+
     it "redirects the user if data is valid" do
       post :create, params: { user: attributes_for(:user) }
       expect(response).to redirect_to(home_path)
@@ -38,7 +42,6 @@ RSpec.describe UsersController, type: :controller do
 
     describe "Sends out email" do
       it "sends email with correct data" do
-        ActionMailer::Base.deliveries.clear
         post :create, params: { user: {"email"=>"tonko@balonko.com", "password"=>"password", "full_name"=>"Tonko Balonko"}}
         sleep(1)
         expect(ActionMailer::Base.deliveries.count).to eq(1)
