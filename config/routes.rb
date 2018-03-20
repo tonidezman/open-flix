@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'reset_passwords/new'
+
+  get 'reset_passwords/edit'
+
   root 'videos#index'
 
   get '/landing-page', to: 'landing#index', as: 'landing_page'

@@ -37,10 +37,14 @@ RSpec.describe UsersController, type: :controller do
     end
 
     describe "Sends out email" do
-      fit "sends email" do
-        post :create, params: { user: attributes_for(:user) }
+      it "sends email with correct data" do
+        ActionMailer::Base.deliveries.clear
+        post :create, params: { user: {"email"=>"tonko@balonko.com", "password"=>"password", "full_name"=>"Tonko Balonko"}}
         sleep(1)
         expect(ActionMailer::Base.deliveries.count).to eq(1)
+        expect(ActionMailer::Base.deliveries.last.body).to have_content("Tonko Balonko")
+        expect(ActionMailer::Base.deliveries.last.subject).to have_content("Welcome")
+        expect(ActionMailer::Base.deliveries.last.to).to eq(["tonko@balonko.com"])
       end
     end
   end
