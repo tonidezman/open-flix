@@ -1,2 +1,10 @@
-%h1 ResetPasswords#edit
-%p Find me in app/views/reset_passwords/edit.html.haml
+%section.reset_password.container
+  .row
+    .col-sm-10.col-sm-offset-1
+      = bootstrap_form_tag(url: reset_password_path(@new_token, email: @email), method: :put) do |f|
+        %header
+          %h1 Reset Your Password
+        .row
+          = f.password_field :password, label: 'New Password',  wrapper: { class: 'col-sm-4' }
+        = f.submit 'Reset Password'
+
