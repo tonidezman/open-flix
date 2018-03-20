@@ -14,7 +14,7 @@ class ResetPasswordsController < ApplicationController
       redirect_to new_reset_password_path
     else
       flash[:danger] = "User with this email (#{email}) is not registered."
-      redirect_to new_reset_password_path
+      redirect_to register_path
     end
   end
 
@@ -29,11 +29,11 @@ class ResetPasswordsController < ApplicationController
   def update
     email = URI.decode(params[:email])
     token_id = params[:id]
-    validate_and_expire_token(email, token_id)
-    password = params[:password]
+
+    return unless validate_and_expire_token(email, token_id)
 
     user = User.find_by(email: email)
-    user.password = password
+    user.password = params[:password]
     user.save
 
     flash[:notice] = "Password changed."
