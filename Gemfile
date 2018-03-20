@@ -28,7 +28,6 @@ group :development, :test do
   gem 'pry-nav'
   gem 'rspec-rails'
   gem 'factory_bot_rails'
-  gem 'guard-rspec', require: false
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
 end
