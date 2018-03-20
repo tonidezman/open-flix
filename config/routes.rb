@@ -1,9 +1,4 @@
 Rails.application.routes.draw do
-
-  get 'reset_passwords/new'
-
-  get 'reset_passwords/edit'
-
   root 'videos#index'
 
   get '/landing-page', to: 'landing#index', as: 'landing_page'
@@ -24,8 +19,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :reset_passwords, only: [:new, :create, :edit, :update]
   resources :users, only: [:show, :create]
-
   resources :reviews, only: :create
 
   resources :videos, only: :show do

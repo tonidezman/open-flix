@@ -1,2 +1,10 @@
-%h1 ResetPasswords#new
-%p Find me in app/views/reset_passwords/new.html.haml
+%section.forgot_password.container
+  .row
+    .col-sm-10.col-bg-offset-1
+      = bootstrap_form_tag(url: reset_passwords_path, method: :post) do |f|
+        %header
+          %h1 Forgot Password?
+          %p We will send you an email with a link that you can use to reset your password.
+        .row
+          = f.email_field :email, label: "Email Address",  wrapper: { class: 'col-sm-4' }
+        = f.submit "Send email"

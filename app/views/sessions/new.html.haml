@@ -9,3 +9,4 @@
         .row
           = f.password_field :password, label: "Password",  wrapper: { class: 'col-sm-4' }
         = f.submit "Log in"
+        = link_to "forgot password?", new_reset_password_path, class: 'forgot-password-link'
