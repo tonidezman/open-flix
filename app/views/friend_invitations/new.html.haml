@@ -10,6 +10,6 @@
           .row
             = f.text_field :email, label: "Friend's Email Address", wrapper: { class: 'col-sm-4' }
           .row
-            = f.text_area :invitation_text, label: "Invitation Message", rows: 6, placeholder: "Please join this really cool site!", wrapper: { class: 'col-sm-6'}
+            = f.text_area :invitation_text, label: "Invitation Message", rows: 6, value: "Please join this really cool site!", wrapper: { class: 'col-sm-6'}
           = f.submit "Send Invitation"
 

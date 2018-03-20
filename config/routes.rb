@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get '/logout',  to: 'sessions#destroy'
   get '/register', to: 'users#new'
   get '/categories/show'
+  get 'mail_to_friend_was_sent', to: 'friend_invitations#mail_was_sent'
 
   # get 'queue_items/index', as: 'queue_items'
   resources :queue_items, only: [:index, :create, :destroy]

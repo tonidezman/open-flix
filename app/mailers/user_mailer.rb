@@ -9,4 +9,11 @@ class UserMailer < ApplicationMailer
     @reset_url = reset_url
     mail(to: email, subject: "OpenFlix - Reset password instructions")
   end
+
+  def friend_invitation(existing_user_name, friend_name, friend_email, invitation_text)
+    @existing_user_name = existing_user_name
+    @friend_name = friend_name
+    @invitation_text = invitation_text
+    mail(to: friend_email, subject: "Hi #{@friend_name}.")
+  end
 end
