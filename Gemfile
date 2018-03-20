@@ -22,12 +22,12 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem "bootstrap_form", "~> 2.7"
 gem 'faker'
+gem 'factory_bot_rails'
 
 group :development, :test do
   gem 'pry-rails'
   gem 'pry-nav'
   gem 'rspec-rails'
-  gem 'factory_bot_rails'
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
 end
