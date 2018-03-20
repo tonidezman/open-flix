@@ -35,6 +35,14 @@ RSpec.describe UsersController, type: :controller do
       post :create, params: { user: {"email"=>"", "password"=>"secret password", "full_name"=>""}}
       expect(response).to have_http_status(:success)
     end
+
+    describe "Sends out email" do
+      fit "sends email" do
+        post :create, params: { user: attributes_for(:user) }
+        sleep(1)
+        expect(ActionMailer::Base.deliveries.count).to eq(1)
+      end
+    end
   end
 
   describe "GET #show" do
