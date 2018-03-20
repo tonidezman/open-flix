@@ -19,9 +19,10 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :reset_passwords, only: [:new, :create, :edit, :update]
   resources :users, only: [:show, :create]
   resources :reviews, only: :create
+  resources :reset_passwords, only: [:new, :create, :edit, :update]
+  resources :friend_invitations, only: [:new, :create]
 
   resources :videos, only: :show do
     collection do
