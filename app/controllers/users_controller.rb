@@ -10,6 +10,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
+      UserMailer.welcome_email(@user).deliver_later
+
       session[:user_id] = @user.id
       redirect_to home_path
     else
