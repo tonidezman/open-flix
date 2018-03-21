@@ -29,6 +29,7 @@ group :development, :test do
   gem 'pry-nav'
   gem 'rspec-rails'
   gem 'capybara', '~> 2.13'
+  gem 'capybara-email'
   gem 'selenium-webdriver'
 end
 

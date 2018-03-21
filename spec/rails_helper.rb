@@ -10,6 +10,7 @@ require 'rspec/rails'
 
 require 'support/factory_bot'
 require 'capybara/rails'
+require 'capybara/email/rspec'
 Capybara.server = :puma
 
 
