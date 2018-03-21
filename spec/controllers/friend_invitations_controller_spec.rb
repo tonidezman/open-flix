@@ -32,9 +32,9 @@ RSpec.describe FriendInvitationsController, type: :controller do
     it "it sends email to a friend and redirects to mail_was_send page" do
       create_user_and_login
       post :create, params: { friend_name: "Dadi", email: "friend@example.com", invitation_text: "Hello my friend!" }
+      expect(response).to redirect_to(mail_to_friend_was_sent_path)
       sleep(1)
       expect(ActionMailer::Base.deliveries.count).to eq(1)
-      expect(response).to redirect_to(mail_to_friend_was_sent_path)
     end
 
     it "it redirects to landing_page if user is not logged in" do

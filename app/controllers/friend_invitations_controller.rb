@@ -12,7 +12,7 @@ class FriendInvitationsController < ApplicationController
       return
     end
 
-    UserMailer.friend_invitation(current_user.full_name, params[:friend_name], params[:email], params[:invitation_text]).deliver_later
+    UserMailer.friend_invitation(current_user, params[:friend_name], params[:email], params[:invitation_text]).deliver_later
     redirect_to mail_to_friend_was_sent_path
   end
 

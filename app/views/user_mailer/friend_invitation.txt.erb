@@ -1,5 +1,5 @@
 Hi <%= @friend_name %> you should checkout this OpenFlix site. It is awesome
 ========================================================================================
-It's <%= @existing_user_name %>
+It's <%= @existing_user.full_name %>
 
-<%= link_to "Click here to register", "#" %>
+<%= link_to "Click here to register", register_url(email: @existing_user_name) %>
