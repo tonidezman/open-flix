@@ -5,9 +5,10 @@
         %header
           %h1 Register
 
-        =f.email_field :email, label: "Email Address"
-        =f.password_field :password, label: "Password"
-        =f.text_field :full_name, label: "Full Name"
+        = f.email_field :email, label: "Email Address"
+        = f.password_field :password, label: "Password"
+        = f.text_field :full_name, label: "Full Name"
+        = hidden_field_tag :existing_user_email, params[:existing_user_email]
         .form-group
           .col-sm2.col-sm-offset-2.register-submit-btn
             = f.submit "Sign Up"

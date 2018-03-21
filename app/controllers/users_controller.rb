@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 
     if @user.save
       UserMailer.welcome_email(@user).deliver_later
-
+      follow_each_other(params[:existing_user_email], @user)
       session[:user_id] = @user.id
       redirect_to home_path
     else
@@ -25,6 +25,14 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def follow_each_other(existing_user_email, new_user)
+    existing_user = User.find_by(email: existing_user_email)
+    return unless existing_user
+
+    existing_user.friends << new_user
+    new_user.friends << existing_user
+  end
 
   def user_params
     params.require(:user).permit(:email, :password, :full_name)

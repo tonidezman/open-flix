@@ -40,7 +40,34 @@ RSpec.describe UsersController, type: :controller do
       expect(response).to have_http_status(:success)
     end
 
-    describe "Sends out email" do
+    context "Inviting new user" do
+      it "creates mutual following between two users" do
+        create(:user, email: 'existing_user@example.com')
+        post :create, params: {
+          user: {"email"=>"new_user@example.com", "password"=>"password", "full_name"=>"John Doe"},
+          "existing_user_email"=>"existing_user@example.com"
+        }
+        expect(User.count).to eq(2)
+
+        existing_user = User.find_by(email: 'existing_user@example.com')
+        new_user = User.find_by(email: 'new_user@example.com')
+        expect(existing_user.friends).to eq([new_user])
+        expect(new_user.friends).to eq([existing_user])
+      end
+
+      it "ignores following if existing user email is not in database" do
+        post :create, params: {
+          user: {"email"=>"new_user@example.com", "password"=>"password", "full_name"=>"John Doe"},
+          "existing_user_email"=>"nonexisting_user@example.com"
+        }
+        expect(User.count).to eq(1)
+
+        new_user = User.find_by(email: 'new_user@example.com')
+        expect(new_user.friends).to eq([])
+      end
+    end
+
+    context "Sends out email" do
       it "sends email with correct data" do
         post :create, params: { user: {"email"=>"tonko@balonko.com", "password"=>"password", "full_name"=>"Tonko Balonko"}}
         sleep(1)
