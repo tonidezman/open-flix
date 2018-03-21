@@ -27,5 +27,9 @@ module OpenFlix
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    Raven.configure do |config|
+      config.dsn = 'https://02d8b9cd9aff4061a8d3163d33fec202:ab622204a7da4176a53b6bf66409cd8c@sentry.io/359398'
+    end
   end
 end
