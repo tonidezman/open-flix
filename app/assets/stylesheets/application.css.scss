@@ -16,6 +16,11 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+.turbolinks-progress-bar {
+  height: 5px;
+  background-color: #B9090B;
+}
+
 .register-submit-btn {
   input {
     margin-left: 15px;
