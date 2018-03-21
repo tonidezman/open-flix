@@ -10,7 +10,10 @@ Rails.application.routes.draw do
   get '/categories/show'
   get 'mail_to_friend_was_sent', to: 'friend_invitations#mail_was_sent'
 
-  # get 'queue_items/index', as: 'queue_items'
+  namespace :admin do
+      resources :videos, only: [:new]
+  end
+
   resources :queue_items, only: [:index, :create, :destroy]
   post '/update_queue_items_update', to: 'queue_items#update_items'
 
