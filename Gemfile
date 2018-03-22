@@ -23,7 +23,7 @@ gem 'jbuilder', '~> 2.5'
 gem "bootstrap_form", "~> 2.7"
 gem 'faker'
 gem 'factory_bot_rails'
-gem 'mailgun-ruby', '~>1.1.6'
+# gem 'mailgun-ruby', '~>1.1.6'
 gem 'sentry-raven'
 
 group :development, :test do
