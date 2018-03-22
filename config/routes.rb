@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get 'mail_to_friend_was_sent', to: 'friend_invitations#mail_was_sent'
 
   namespace :admin do
-      resources :videos, only: [:new]
+      resources :videos, only: [:new, :create]
   end
 
   resources :queue_items, only: [:index, :create, :destroy]
