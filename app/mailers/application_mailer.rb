@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'test@example.com'
+  default from: 'openflix2@gmail.com'
   layout 'mailer'
 end
