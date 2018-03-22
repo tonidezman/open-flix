@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180321125742) do
+ActiveRecord::Schema.define(version: 20180322095649) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,9 +76,9 @@ ActiveRecord::Schema.define(version: 20180321125742) do
     t.datetime "updated_at", null: false
     t.string "title"
     t.text "description"
-    t.string "small_cover_url"
-    t.string "large_cover_url"
     t.integer "category_id"
+    t.string "large_cover"
+    t.string "small_cover"
     t.index ["category_id"], name: "index_videos_on_category_id"
   end
 

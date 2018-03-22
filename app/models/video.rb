@@ -3,6 +3,9 @@ class Video < ApplicationRecord
   has_many :reviews
   has_one :queue_item, dependent: :destroy
 
+  mount_uploader :large_cover, LargeCoverUploader
+  mount_uploader :small_cover, SmallCoverUploader
+
   validates_presence_of :title, :description
 
   def self.search_by_title(title)
