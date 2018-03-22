@@ -23,8 +23,8 @@ gem 'jbuilder', '~> 2.5'
 gem "bootstrap_form", "~> 2.7"
 gem 'faker'
 gem 'factory_bot_rails'
-# gem 'mailgun-ruby', '~>1.1.6'
 gem 'sentry-raven'
+gem 'carrierwave'
 
 group :development, :test do
   gem 'pry-rails'
