@@ -14,6 +14,8 @@ Rails.application.routes.draw do
       resources :videos, only: [:new, :create]
   end
 
+  resources :charges, only: [:new, :create]
+
   resources :queue_items, only: [:index, :create, :destroy]
   post '/update_queue_items_update', to: 'queue_items#update_items'
 
