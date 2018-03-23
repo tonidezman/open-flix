@@ -36,6 +36,7 @@ group :development, :test do
   gem 'capybara', '~> 2.13'
   gem 'capybara-email'
   gem 'selenium-webdriver'
+  gem 'dotenv-rails'
 end
 
 group :development do
