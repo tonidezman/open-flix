@@ -13,6 +13,7 @@
           = f.text_field :title, label: 'Title'
           = f.select :category_id, @category_options, prompt: 'Select category'
           = f.text_area :description, label: 'Description', rows: 8
+          = f.text_field :trailer_url, label: 'Trailer URL'
           = f.file_field :large_cover, label: 'Large Cover', class: 'btn btn-file'
           = f.file_field :small_cover, label: 'Small Cover', class: 'btn btn-file'
         %fieldset.actions.form-group
