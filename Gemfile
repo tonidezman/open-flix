@@ -25,6 +25,8 @@ gem 'faker'
 gem 'factory_bot_rails'
 gem 'sentry-raven'
 gem 'carrierwave'
+gem 'mini_magick'
+gem 'carrierwave-aws'
 
 group :development, :test do
   gem 'pry-rails'

@@ -18,15 +18,6 @@ drama = FactoryBot.create(:category, name: 'Drama')
 action = FactoryBot.create(:category, name: 'Action')
 
 puts
-puts "Generating Videos"
-10.times do |index|
-  FactoryBot.create(:video, title: "Futurama #{index}", small_cover_url: '/tmp/futurama.jpg', category: comedy)
-  FactoryBot.create(:video, title: "South Park #{index}", small_cover_url: '/tmp/south_park.jpg', category: drama)
-  FactoryBot.create(:video, title: "Family Guy #{index}", small_cover_url: '/tmp/family_guy.jpg', category: action)
-  FactoryBot.create(:video, title: "Monk #{index}", small_cover_url: '/tmp/monk.jpg', category: action)
-end
-
-puts
 puts "Creating Users"
 7.times do
   FactoryBot.create(:user, full_name: Faker::Name.name)
