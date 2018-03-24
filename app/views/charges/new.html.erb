@@ -13,8 +13,9 @@
 
     <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
             data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-            data-description="A month's subscription"
+            data-description="Full Access payment"
             data-amount="500"
+            data-currency="eur"
             data-locale="auto"></script>
   <% end %>
 </div>
