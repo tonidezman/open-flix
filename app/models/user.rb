@@ -26,6 +26,14 @@ class User < ApplicationRecord
     end
   end
 
+  def paid?
+    paid
+  end
+
+  def trial_period?
+    !paid?
+  end
+
   def followers
     Friendship.where(friend_id: id)
   end

@@ -1,3 +1,8 @@
+- if current_user&.trial_period?
+  %br
+  %h1.text-center
+    You are using trial version of this app
+    = link_to "Pay to get full access", new_charge_path
 %section#top-header.row
   %h1.col-md-2
     = link_to "OpenFlix", home_path
@@ -22,5 +27,5 @@
               %a(href="#") Account
               %a(href="#") Plan and Billing
               = link_to "Invite a Friend", new_friend_invitation_path
-              = link_to "Pay", new_charge_path
+              = link_to "Pay", new_charge_path unless current_user.paid?
               = link_to "Sign Out", logout_path
