@@ -43,3 +43,12 @@
   width: 127px;
   margin-left: 22px;
 }
+
+.stripe-button-el span {
+  background-image: linear-gradient(#B9090B, red 85%,#B9090B) !important;
+  transform: scale(1.15);
+}
+
+#pay-heading {
+  font-size: 2em;
+}
