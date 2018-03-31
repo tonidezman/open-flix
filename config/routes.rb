@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount StripeEvent::Engine, at: '/payments'
+
   root 'videos#index'
 
   get '/landing-page', to: 'landing#index', as: 'landing_page'
@@ -15,6 +17,7 @@ Rails.application.routes.draw do
   end
 
   resources :charges, only: [:new, :create]
+  resources :payments, only: [:index]
 
   resources :queue_items, only: [:index, :create, :destroy]
   post '/update_queue_items_update', to: 'queue_items#update_items'

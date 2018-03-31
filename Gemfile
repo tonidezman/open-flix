@@ -28,6 +28,7 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'carrierwave-aws'
 gem 'stripe'
+gem 'stripe_event'
 
 group :development, :test do
   gem 'pry-rails'

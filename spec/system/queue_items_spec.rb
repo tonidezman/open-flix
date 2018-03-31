@@ -6,7 +6,7 @@ RSpec.describe "User sign's in", :type => :system, js: true do
   it "user signs up/register for our app" do
     video = create(:video, title: "Superman")
     3.times do
-      create(:video, small_cover_url: '/tmp/futurama.jpg')
+      create(:video)
     end
 
     visit login_path
@@ -16,7 +16,7 @@ RSpec.describe "User sign's in", :type => :system, js: true do
     expect(page).to have_content(user.full_name)
 
     click_on "OpenFlix"
-    find("a[href*='videos/#{video.id}'").click
+    find("a[href*='/videos/#{video.id}'").click
     expect(page).to have_content(video.title)
 
     click_link "+ My Queue"
