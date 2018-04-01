@@ -52,3 +52,22 @@
 #pay-heading {
   font-size: 2em;
 }
+
+.hide-label {
+  label {
+    display: none;
+  }
+}
+
+.checkbox {
+  margin-left: 14px;
+}
+
+.form-group {
+  margin-bottom: 0;
+}
+
+#rating-from-to .form-group {
+  display: inline-block;
+  width: 200px;
+}

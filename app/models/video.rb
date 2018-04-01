@@ -1,4 +1,6 @@
 class Video < ApplicationRecord
+  searchkick
+
   belongs_to :category
   has_many :reviews
   has_one :queue_item, dependent: :destroy

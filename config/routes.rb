@@ -35,7 +35,8 @@ Rails.application.routes.draw do
 
   resources :videos, only: :show do
     collection do
-      post :search
+      get :search
+      post :search, to: "videos#search_form_submitted"
     end
   end
 

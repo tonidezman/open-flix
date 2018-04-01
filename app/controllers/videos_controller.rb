@@ -15,6 +15,15 @@ class VideosController < ApplicationController
   end
 
   def search
-    @videos = Video.search_by_title(params[:search_term])
+    @search_term = params[:search_term]
+    @videos = if @search_term.present?
+                Video.search_by_title(params[:search_term])
+              else
+                []
+              end
+  end
+
+  def search_form_submitted
+    redirect_to search_videos_path(search_term: params[:search_term])
   end
 end
