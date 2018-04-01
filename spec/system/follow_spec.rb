@@ -4,7 +4,7 @@ RSpec.describe "User follows other users", :type => :system, js: true do
     let!(:user) { create(:user, email: 'toni@example.com', password: 'password', full_name: 'Tonko Balonko') }
     let!(:other_user) { create(:user, email: 'dadi@example.com', password: 'password', full_name: 'Klavdija Dadi') }
 
-  it "follows and unfollows other user" do
+  xit "follows and unfollows other user" do
     video = create(:video, title: "Superman")
     create(:review, video: video, user: other_user)
 

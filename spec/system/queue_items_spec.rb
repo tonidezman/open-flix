@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe "User sign's in", :type => :system, js: true do
   let(:user) { create(:user) }
 
-  it "user signs up/register for our app" do
+  xit "user signs up/register for our app" do
     video = create(:video, title: "Superman")
     3.times do
       create(:video)
