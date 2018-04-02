@@ -1,18 +1,18 @@
 %section.advanced_search.container
-  = bootstrap_form_tag(url: search_videos_path, method: :get, layout: :horizontal, control_col: 'col-sm-8') do |f|
+  = bootstrap_form_tag(url: search_videos_path, method: :post, layout: :horizontal, control_col: 'col-sm-8') do |f|
     %header
       %h1 Advanced Search
     .form-group
-      = f.text_field :search_term, hide_label: true, placeholder: "Search videos by title, description", wrapper: { class: 'col-sm-6 hide-label'}
+      = f.text_field :search_term, hide_label: true, value: @search_term, placeholder: "Search videos by title, description", wrapper: { class: 'col-sm-6 hide-label'}
     .form-group
-      = f.check_box :include_reviews, label: "Include Reviews"
+      = f.check_box :include_reviews, label: "Include Reviews", checked: @include_reviews
     %br
     .form-group
       .row.average_rating_label Average Rating
     %span#rating-from-to
-      = f.select :rating_from, (10..50).map { |num| num / 10.0 }, label: 'From:'
+      = f.select :rating_from, (10..50).map { |num| num / 10.0 }, label: 'From:', selected: @avg_rating_min
     %span#rating-from-to
-      = f.select :rating_to, (10..50).map { |num| num / 10.0 }, label: 'To:'
+      = f.select :rating_to, (10..50).map { |num| num / 10.0 }, label: 'To:', selected: @avg_rating_max
     %br
     %br
     = f.submit 'Search', class: 'btn btn-primary'

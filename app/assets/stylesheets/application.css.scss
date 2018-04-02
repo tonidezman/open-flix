@@ -63,11 +63,17 @@
   margin-left: 14px;
 }
 
-.form-group {
-  margin-bottom: 0;
+.advanced_search {
+  .form-group {
+    margin-bottom: 0;
+  }
 }
 
 #rating-from-to .form-group {
   display: inline-block;
   width: 200px;
+}
+
+ul.dropdown-menu {
+  width: 201px;
 }
