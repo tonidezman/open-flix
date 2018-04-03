@@ -3,7 +3,7 @@
     .col-sm-10.col-sm-offset-1
       %article
         %header
-          %img(src="http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest('knwang@gmail.com'.downcase)}?s=40")
+          %img(src="https://www.gravatar.com/avatar/#{Digest::MD5.hexdigest('knwang@gmail.com'.downcase)}?s=40")
           %h2 #{@user.full_name}'s video collections (#{@queue_items.count})
           %br
           = link_to "Follow", create_friendship_friendship_path(@user), method: :post, class: "btn btn-default follow-button" if current_user.can_follow?(@user)
