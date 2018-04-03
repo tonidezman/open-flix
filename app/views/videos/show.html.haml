@@ -1,19 +1,20 @@
-%article.video
-  .container
-    .row
-      .video_large_cover.col-sm-7.col-sm-offset-1
-        %img(src="#{@video.large_cover_url}")
-      .video_info.col-sm-3
-        %header
-          %h3= @video.title
-          %span Rating: #{@average_review_score}/5.0
-        %p= @video.description
-        .actions
-          - if current_user.paid?
-            %a.btn.btn-primary(href="#{@video.trailer_url}") Watch Now
-          - if @video.not_yet_queued?(current_user)
-            = link_to "+ My Queue", queue_items_path(video_id: params[:id]),
-                method: :post, class: "btn btn-default"
+- cache @video do
+  %article.video
+    .container
+      .row
+        .video_large_cover.col-sm-7.col-sm-offset-1
+          %img(src="#{@video.large_cover_url}")
+        .video_info.col-sm-3
+          %header
+            %h3= @video.title
+            %span Rating: #{@average_review_score}/5.0
+          %p= @video.description
+          .actions
+            - if current_user.paid?
+              %a.btn.btn-primary(href="#{@video.trailer_url}") Watch Now
+            - if @video.not_yet_queued?(current_user)
+              = link_to "+ My Queue", queue_items_path(video_id: params[:id]),
+                  method: :post, class: "btn btn-default"
 
 %section.reviews.container
   .row
@@ -32,14 +33,15 @@
 
       %header
         %h3 User Reviews (#{@reviews_count})
-      %ul
-        - @reviews.each do |review|
-          %article.review
-            %li.row
-              .col-sm-2
-                %span Rating: #{review.rating} / 5
-                %p
-                  by
-                  = link_to review.user.full_name, review.user
-              .col-sm-8
-                %p= review.body
+      - cache @reviews do
+        %ul
+          - @reviews.each do |review|
+            %article.review
+              %li.row
+                .col-sm-2
+                  %span Rating: #{review.rating} / 5
+                  %p
+                    by
+                    = link_to review.user.full_name, review.user
+                .col-sm-8
+                  %p= review.body

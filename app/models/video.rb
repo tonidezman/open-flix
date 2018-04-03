@@ -1,5 +1,5 @@
 class Video < ApplicationRecord
-  belongs_to :category
+  belongs_to :category, touch: true
   has_many :reviews
   has_one :queue_item, dependent: :destroy
 
