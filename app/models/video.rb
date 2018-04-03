@@ -1,5 +1,6 @@
 class Video < ApplicationRecord
   searchkick
+  scope :search_import, -> { includes(:review) }
 
   belongs_to :category
   has_many :reviews
@@ -25,5 +26,17 @@ class Video < ApplicationRecord
 
   def average_review_score
     reviews&.average(:rating)&.round(1)
+  end
+
+  def search_data
+    {
+      title: title,
+      description: description,
+      average_score: reviews.average(:rating).to_f,
+      reviews_count: reviews.count,
+      review: {
+        body: review.body
+      }
+    }
   end
 end

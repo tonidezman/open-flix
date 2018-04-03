@@ -20,6 +20,21 @@ class VideosController < ApplicationController
     @videos = get_videos(@search_term)
     @avg_rating_min = get_min_rating(params[:avg_rating_from])
     @avg_rating_max = get_max_rating(params[:avg_rating_to])
+
+    @videos_found = nil
+    @all_videos = nil
+
+    if @search_term.blank?
+      @all_videos = Video.search "*", where: {
+        average_score: { gte: @avg_rating_min, lte: @avg_rating_max }
+      }
+      @videos_count = @all_videos.count
+    else
+      @videos_found = Video.search @search_term, where: {
+        average_score: { gte: @avg_rating_min, lte: @avg_rating_max }
+      }, highlight: { tag: "<em class='label label-highlight'>" }
+      @videos_count = @videos_found.count
+    end
   end
 
   def advanced_search

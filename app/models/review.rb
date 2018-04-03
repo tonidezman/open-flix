@@ -1,4 +1,6 @@
 class Review < ApplicationRecord
+  searchkick
+
   belongs_to :user
   belongs_to :video
 
@@ -10,5 +12,11 @@ class Review < ApplicationRecord
 
   def video_category_name
     video.category.name
+  end
+
+  def search_data
+    {
+      body: body,
+    }
   end
 end
