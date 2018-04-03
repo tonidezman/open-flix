@@ -1,24 +1,23 @@
-# README
+# OpenFlix
+## I have build this app to learn few Rails and Web Development concepts.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+What I have learned building this app:
+- TDD
+- Writing Unit, Controller & System tests
+- Rspec
+- Haml
+- Polymorphic associations
+- Email sending
+- Background workers
+- Accepting payments using stripe
+- Transactions
+- Error tracking system (sentry)
+- CI (Continuous integration)
+- Advanced search using Elasticsearch
+- Uploading images to AWS
+- Fragment & Russian doll Caching
 
-Things you may want to cover:
+-----
+### If you want to do the same. you can clone the app and checkout to this commit (*29fb82f*)
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+**localhost:3000/ui** lists all pages that you want to implement in your app
