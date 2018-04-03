@@ -20,4 +20,4 @@ What I have learned building this app:
 -----
 ### If you want to do the same. you can clone the app and checkout to this commit (*29fb82f*)
 
-**localhost:3000/ui** lists all pages that you want to implement in your app
+**localhost:3000/ui** lists all pages with styling that you can use to implement all the features.
