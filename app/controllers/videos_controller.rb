@@ -15,6 +15,7 @@ class VideosController < ApplicationController
   end
 
   def search
+    # TODO extract logic from this method to private methods
     @search_term = params[:search_term]
     @include_reviews = is_checked(params[:include_reviews])
     @videos = get_videos(@search_term)
@@ -28,6 +29,11 @@ class VideosController < ApplicationController
       @all_videos = Video.search "*", misspellings: { edit_distance: 2 },  where: {
         average_score: { gte: @avg_rating_min, lte: @avg_rating_max }
       }, limit: 5
+
+      if @all_videos.empty?
+        @all_videos = Video.search "*", misspellings: { edit_distance: 2 }, limit: 5
+      end
+
       @videos_count = @all_videos.count
     else
       query_fields = [:title, :description, :average_score, :reviews_count]
@@ -38,7 +44,7 @@ class VideosController < ApplicationController
 
       if @videos_found.empty?
         # movie has no reviews yet
-        @videos_found = Video.search @search_term, highlight: { tag: "<em class='label label-highlight'>" }, limit: 5
+        @videos_found = Video.search @search_term, highlight: { tag: "<em class='label label-highlight'>" }, limit: 5, highlight: { tag: "<em class='label label-highlight'>" }, limit: 5
       end
 
       @videos_count = @videos_found.count
