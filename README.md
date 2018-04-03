@@ -1,5 +1,5 @@
 # OpenFlix
-## I have build this app to learn few Rails and Web Development concepts.
+### I have build this app to learn advance Rails and Web Development concepts.
 
 What I have learned building this app:
 - TDD
