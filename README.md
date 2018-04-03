@@ -18,6 +18,11 @@ What I have learned building this app:
 - Fragment & Russian doll Caching
 
 -----
-### If you want to do the same. you can clone the app and checkout to this commit (*29fb82f*)
+### If you want to build this app.
+You can:
+- clone the app
+- checkout to this commit (*29fb82f*)
+- create new branch
+- click though [demo app](https://openflix.herokuapp.com/home) and implement features one by one
 
-**localhost:3000/ui** lists all pages with styling that you can use to implement all the features.
+**localhost:3000/ui** lists all static pages you can use to implement all the features.
