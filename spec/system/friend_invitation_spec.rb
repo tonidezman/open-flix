@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe "User sign's in", :type => :system, js: true do
   let(:existing_user) { create(:user, full_name: "Toni Dezman", email: "toni@dezman.com") }
 
-  it "checks if both user follow each other when existing user invites a friend" do
+  xit "checks if both user follow each other when existing user invites a friend" do
     extend Capybara::Email::DSL
     clear_emails
     existing_user_logs_in
