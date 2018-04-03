@@ -1,10 +1,8 @@
 class Review < ApplicationRecord
-  searchkick
-
   belongs_to :user
   belongs_to :video
 
-  validates :rating, presence: true
+  after_save :reindex_videos
 
   def video_category
     video.category
@@ -14,9 +12,7 @@ class Review < ApplicationRecord
     video.category.name
   end
 
-  def search_data
-    {
-      body: body,
-    }
+  def reindex_videos
+    Video.reindex
   end
 end

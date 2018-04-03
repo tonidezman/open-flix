@@ -1,10 +1,9 @@
 class Video < ApplicationRecord
-  searchkick
-  scope :search_import, -> { includes(:review) }
-
   belongs_to :category
   has_many :reviews
   has_one :queue_item, dependent: :destroy
+
+  searchkick
 
   mount_uploader :large_cover, LargeCoverUploader
   mount_uploader :small_cover, SmallCoverUploader
@@ -34,9 +33,7 @@ class Video < ApplicationRecord
       description: description,
       average_score: reviews.average(:rating).to_f,
       reviews_count: reviews.count,
-      review: {
-        body: review.body
-      }
+      reviews: reviews.map(&:body).join(" | "),
     }
   end
 end

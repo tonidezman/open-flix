@@ -25,14 +25,16 @@ class VideosController < ApplicationController
     @all_videos = nil
 
     if @search_term.blank?
-      @all_videos = Video.search "*", where: {
+      @all_videos = Video.search "*", misspellings: { edit_distance: 2 },  where: {
         average_score: { gte: @avg_rating_min, lte: @avg_rating_max }
-      }
+      }, limit: 5
       @videos_count = @all_videos.count
     else
-      @videos_found = Video.search @search_term, where: {
-        average_score: { gte: @avg_rating_min, lte: @avg_rating_max }
-      }, highlight: { tag: "<em class='label label-highlight'>" }
+      query_fields = [:title, :description, :average_score, :reviews_count]
+      query_fields << :reviews if @include_reviews
+      @videos_found = Video.search @search_term, fields: query_fields, where: {
+        average_score: { gte: @avg_rating_min, lte: @avg_rating_max },
+      }, highlight: { tag: "<em class='label label-highlight'>" }, limit: 5
       @videos_count = @videos_found.count
     end
   end
