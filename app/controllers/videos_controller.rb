@@ -35,6 +35,12 @@ class VideosController < ApplicationController
       @videos_found = Video.search @search_term, fields: query_fields, where: {
         average_score: { gte: @avg_rating_min, lte: @avg_rating_max },
       }, highlight: { tag: "<em class='label label-highlight'>" }, limit: 5
+
+      if @videos_found.empty?
+        # movie has no reviews yet
+        @videos_found = Video.search @search_term, highlight: { tag: "<em class='label label-highlight'>" }, limit: 5
+      end
+
       @videos_count = @videos_found.count
     end
   end
