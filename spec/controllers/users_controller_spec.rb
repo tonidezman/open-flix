@@ -94,5 +94,4 @@ RSpec.describe UsersController, type: :controller do
       expect(response).to redirect_to landing_page_path
     end
   end
-
 end

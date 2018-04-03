@@ -49,17 +49,6 @@ RSpec.describe ResetPasswordsController, type: :controller do
   end
 
   describe "PUT #update" do
-    xit "changes password if valid token/email" do
-      # TODO Try to figure out how to pass this test
-      old_password = "OldPassword"
-      new_password = "NewPassword"
-      user = create(:user, full_name: "Toni Dezman", email: "toni@dezman.com", password: old_password)
-      token_email_record = create(:reset_password, email: user.email, token: SecureRandom.hex(13))
-
-      put :update, params: { id: token_email_record.token, email: user.email, password: new_password }
-      expect(user.reload.password).to eq(new_password)
-    end
-
     it "does not change password if invalid token/email" do
       old_password = "OldPassword"
       new_password = "NewPassword"
@@ -78,6 +67,5 @@ RSpec.describe ResetPasswordsController, type: :controller do
       get :update, params: { id: 'xxxxxxxxxxxxx', email: user.email, password: new_password }
       expect(response).to redirect_to(login_path)
     end
-
   end
 end

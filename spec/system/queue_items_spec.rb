@@ -23,6 +23,5 @@ RSpec.describe "User sign's in", :type => :system, js: true do
     expect(page).to have_content("My Queue")
     visit "videos/#{video.id}"
     expect(page).not_to have_content "+ My Queue"
-
   end
 end

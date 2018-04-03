@@ -17,8 +17,6 @@ RSpec.describe VideosController, type: :controller do
   end
 
   describe "GET #show" do
-    before(:all) do
-    end
 
     it "returns http success" do
       user = create(:user)
@@ -43,5 +41,4 @@ RSpec.describe VideosController, type: :controller do
       expect(response).to redirect_to(landing_page_path)
     end
   end
-
 end

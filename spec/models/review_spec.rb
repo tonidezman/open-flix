@@ -34,5 +34,4 @@ RSpec.describe Review, type: :model do
       expect(expected).to eq(actual)
     end
   end
-
 end

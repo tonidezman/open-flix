@@ -150,9 +150,6 @@ RSpec.describe QueueItemsController, type: :controller do
     end
   end
 
-
-
-
   describe "DELETE #destroy" do
     context "user is authenticated" do
       before(:each) do
@@ -187,5 +184,4 @@ RSpec.describe QueueItemsController, type: :controller do
       end
     end
   end
-
 end

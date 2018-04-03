@@ -23,7 +23,6 @@ RSpec.describe User, type: :model do
       create(:queue_item, user: user, position: 7)
       expect(user.next_queue_item_order_num).to eq(8)
     end
-
   end
 
   describe "#can_follow?" do

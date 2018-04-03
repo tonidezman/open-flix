@@ -18,5 +18,4 @@ RSpec.describe ResetPassword, type: :model do
       expect(ResetPassword.count).to eq(1)
     end
   end
-
 end
