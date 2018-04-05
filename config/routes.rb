@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
       resources :videos, only: [:new, :create]
+      resources :recent_payments, only: [:index]
   end
 
   resources :charges, only: [:new, :create]
