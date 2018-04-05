@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root 'videos#index'
 
   get '/landing-page', to: 'landing#index', as: 'landing_page'
+  get 'tutorial/show', as: 'tutorial'
   get  '/home',   to: 'videos#index'
   get  '/login',  to: 'sessions#new'
   post '/login',  to: 'sessions#create'

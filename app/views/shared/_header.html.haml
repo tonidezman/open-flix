@@ -27,3 +27,6 @@
               = link_to "Invite a Friend", new_friend_invitation_path
               = link_to "Pay", new_charge_path unless current_user.paid?
               = link_to "Sign Out", logout_path
+  - else
+    %ul.col-md-4.clearfix
+      %li= link_to "Tutorial", tutorial_path
