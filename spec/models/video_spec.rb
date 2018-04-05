@@ -76,31 +76,4 @@ RSpec.describe Video, type: :model do
       expect(search_result.empty?).to be(true)
     end
   end
-
-
-  describe "#last_5_reviews" do
-    it "returns list of reviews ordered newest first" do
-      video = create(:video)
-      user = create(:user)
-      review_1 = create(:review, user: user, video: video)
-      review_2 = create(:review, user: user, video: video)
-      review_3 = create(:review, user: user, video: video)
-      review_4 = create(:review, user: user, video: video)
-      review_5 = create(:review, user: user, video: video)
-      review_6 = create(:review, user: user, video: video)
-
-      expect(video.last_5_reviews).to eq([review_6, review_5, review_4, review_3, review_2])
-    end
-  end
-
-  describe "#average_review_score" do
-    it "returns average review score" do
-      user = create(:user)
-      video = create(:video)
-      create(:review, rating: 1, video: video, user: user)
-      create(:review, rating: 2, video: video, user: user)
-      create(:review, rating: 2, video: video, user: user)
-      expect(video.average_review_score).to eq(1.7)
-    end
-  end
 end
